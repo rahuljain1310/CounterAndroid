@@ -2,6 +2,7 @@ package com.example.asd.counter;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ViewDebug;
 import android.widget.Button;
 import android.widget.TextView;
 import butterknife.BindView;
@@ -11,7 +12,7 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.count) TextView count;
-    @BindView(R.id.multiplier) Button multiplier;
+    @BindView(R.id.multiplier) TextView multiplier;
     @BindView(R.id.reset) Button reset;
     @BindView(R.id.add_m) Button add_m;
     @BindView(R.id.reduce_m) Button reduce_m;
@@ -31,28 +32,30 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.reset)
     public void reset () {
         count_value=0;
-        count.setText(count_value);
-        multiplier_value=0;
-        multiplier.setText(multiplier_value);
+        count.setText(String.valueOf(count_value));
+        multiplier_value=1;
+        multiplier.setText(multiplier_value+" x");
     }
 
     @OnClick(R.id.increment)
     public void incrementCount () {
         count_value = count_value + multiplier_value;
-        count.setText(count_value);
+        count.setText(String.valueOf(count_value));
     }
 
     @OnClick(R.id.decrement)
     public void decrementCount () {
-        count_value = count_value + multiplier_value;
-        count.setText(count_value);
+        count_value = count_value - multiplier_value;
+        count.setText(String.valueOf(count_value));
     }
     @OnClick(R.id.add_m)
     public void increasemultiplier () {
         multiplier.setText(++multiplier_value+" x");
     }
+
     @OnClick(R.id.reduce_m)
     public void decreasemultiplier () {
-        multiplier.setText(--multiplier_value+" x");
+        if(multiplier_value>1)
+            multiplier.setText(--multiplier_value+" x");
     }
 }
